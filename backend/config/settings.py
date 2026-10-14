@@ -1,4 +1,5 @@
 import django_mongodb_backend
+import os
 """
 Django settings for config project.
 
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
 DATABASES = {
-    'default': django_mongodb_backend.parse_uri('mongodb+srv://esarmientoba_db_user:0urCY4IWIMN3AYbr@cluster0.8c6ewqt.mongodb.net'),
-}
+    'default': {
+        'ENGINE': 'django_mongodb_backend',
+        'HOST': os.environ.get('MONGODB_URI', 'mongodb://localhost:27017'),
+        'NAME': 'tareas_db',
+    },
+    }
 
 # Database routers
 # https://docs.djangoproject.com/en/dev/ref/settings/#database-routers
